@@ -1,0 +1,159 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Kissing Season à €', sans-serif;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    background-color: black;
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+}
+
+@font-face {
+    font-family: 'Kissing Season à €';
+    src: url('fonts/KS.ttf') format('truetype');
+}
+
+.question {
+    color: white;
+    font-size: 5rem;
+    position: absolute;
+    top: 370px;
+    transition: 0.5s ease-in-out;
+    z-index: 1;
+}
+
+img {
+    border-radius: 50px;
+    z-index: -1;
+}
+
+.images-container {
+    position: absolute;
+    top: 100px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+    z-index: 0;
+}
+
+.second-row {
+    top: 450px;
+}
+
+.side-image {
+    display: none;
+    width: 350px;
+    height: 350px;
+    animation: sway 4s infinite alternate ease-in-out;
+    transition: transform 0.01s ease-in-out;
+}
+
+/* Initial swaying animation */
+@keyframes sway {
+    0% { transform: rotate(-10deg); }
+    100% { transform: rotate(10deg); }
+}
+
+/* Buttons */
+.buttons {
+    display: flex;
+    justify-content: center;
+    position: relative;
+    height: 99%;
+    width: 100%;
+    z-index: 1;  /* This ensures the buttons appear on top of the images */
+}
+button {
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #97354E;
+    color: white;
+}
+button:hover {
+    background-color: #591E20;
+}
+#yes-btn {
+    position: absolute;
+    left: 40%;
+    top: 500px;
+}
+#btn {
+    position: absolute;
+    left: 55%;
+    top: 500px;
+    transition: .5s;
+}
+
+/* Fireworks Canvas */
+#fireworksCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* Floating Hearts */
+.heart {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/1200px-Heart_coraz%C3%B3n.svg.png');
+    background-size: cover;
+    animation: floatHearts 4s linear infinite;
+    opacity: 0.8;
+}
+
+@keyframes floatHearts {
+    0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+    100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+}
+
+/* Growing Heart2 Animation */
+.heart2 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    transform: rotate(-45deg);
+    opacity: 0;
+    z-index: -1;
+}
+
+.heart2::before,
+.heart2::after {
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: inherit;
+    border-radius: 50%;
+}
+
+.heart2::before {
+    top: -25px;
+    left: 0;
+}
+
+.heart2::after {
+    top: 0;
+    left: 25px;
+}
+
+/* Heart2 growing and rotating animation */
+@keyframes growHeart2 {
+    0% { transform: rotate(-45deg) scale(0); opacity: 0; }
+    100% { transform: rotate(-45deg) scale(1); opacity: 1; }
+}
