@@ -19,7 +19,7 @@
 
         function startCelebration() {
             // Change question text
-            document.querySelector('.question').innerText = "I Love You Baby";
+            document.querySelector('.question').innerText = "YAYYYYYY!";
     
             // Remove buttons
             document.querySelector('.buttons').style.display = "none";
@@ -33,12 +33,16 @@
             show()
     
             // Play music
-            const audio = new Audio('love_song.mp3'); // Change to your song file
+            const audio = new Audio('song.mp3'); // Change to your song file
             audio.play();
 
             // Start the heart animation after the celebration starts
             startHeart2Animation();
-  
+
+            document.getElementsByClassName('text')[0].style.display = "block";
+            document.getElementsByClassName('text2')[0].style.display = "block";
+            document.getElementsByClassName('text3')[0].style.display = "block";
+            document.getElementsByClassName('luh')[0].style.display = "block";
         }
 
         function show() {
@@ -152,7 +156,7 @@
 
         function startHeart2Animation() {
             const colors = ["#FF0000", // Red
-    "#FF69B4", "#FF1493", "#FFB6C1", "#FFC0CB", "#FFD700", "#FF6347", "#FF4500", "#DC143C", "#DDA0DD"];
+    "#FF69B4", "#FF1493", "#FFB6C1", "#FFC0CB", "#FFD700", "#FF6347", "#FF4500", "#DDA0DD", "#000000"];
 
             colors.forEach((color, index) => {
                 setTimeout(() => {
@@ -160,10 +164,14 @@
                 }, index * 500);
             });
         }
-    </script> 
+    </script>       
 </head>
 <body>
+    <div class="luh">We're So Hot</div>
     <div class="question">Would You Be My Valentine?</div>
+    <div class="text">I Love You so much Baby</div>
+    <div class="text2">You mean the world to me</div>
+    <div class="text3">I'm so glad you decided to walk into my life</div>
     <div class="images-container">
         <img id="left-image" class="side-image" src="photos/1.JPG" alt="Left Image">
         <img id="right-image" class="side-image" src="photos/4.JPG" alt="Right Image">

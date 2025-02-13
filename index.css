@@ -20,6 +20,16 @@ body {
     src: url('fonts/KS.ttf') format('truetype');
 }
 
+.luh {
+    display: none;
+    color: white;
+    font-size: 1rem;
+    position: absolute;
+    top: 880px;
+    transition: 0.5s ease-in-out;
+    z-index: 1;
+}
+
 .question {
     color: white;
     font-size: 5rem;
@@ -27,11 +37,48 @@ body {
     top: 370px;
     transition: 0.5s ease-in-out;
     z-index: 1;
+    animation: sway 4s infinite alternate ease-in-out;
+}
+
+.text {
+    display: none;
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 460px;
+    transition: 0.5s ease-in-out;
+    z-index: 1;
+}
+
+.text2 {
+    display: none;
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 490px;
+    transition: 0.5s ease-in-out;
+    z-index: 1;
+}
+
+.text3 {
+    display: none;
+    color: white;
+    font-size: 2rem;
+    position: absolute;
+    top: 520px;
+    transition: 0.5s ease-in-out;
+    z-index: 1;
 }
 
 img {
     border-radius: 50px;
-    z-index: -1;
+    z-index: 0;
+    transition: width 0.3s ease-in-out, height 0.3s ease-in-out;
+}
+
+img:hover {
+    width: 330px;
+    height: 330px;
 }
 
 .images-container {
@@ -41,7 +88,6 @@ img {
     display: flex;
     justify-content: space-between;
     padding: 0 10%;
-    z-index: 0;
 }
 
 .second-row {
@@ -50,8 +96,8 @@ img {
 
 .side-image {
     display: none;
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
     animation: sway 4s infinite alternate ease-in-out;
     transition: transform 0.01s ease-in-out;
 }
