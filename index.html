@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Will You...</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const button = document.getElementById('btn');
+            button.addEventListener('mouseover', function () {
+                button.style.left = `${Math.ceil(Math.random() * 90)}%`;
+                button.style.top = `${Math.ceil(Math.random() * 90)}%`;
+            });
+            button.addEventListener('click', function () {
+                alert('you clicked me');
+            });
+        });
+
+        function startCelebration() {
+            // Change question text
+            document.querySelector('.question').innerText = "I Love You Baby";
+    
+            // Remove buttons
+            document.querySelector('.buttons').style.display = "none";
+    
+            // Start fireworks
+            startFireworks();
+    
+            // Generate floating hearts
+            generateHearts();
+
+            show()
+    
+            // Play music
+            const audio = new Audio('love_song.mp3'); // Change to your song file
+            audio.play();
+
+            // Start the heart animation after the celebration starts
+            startHeart2Animation();
+  
+        }
+
+        function show() {
+            let elements = document.getElementsByClassName('side-image');
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].style.display = "block";
+            }
+        }
+
+
+
+        function generateHearts() {
+            for (let i = 0; i < 20; i++) { // Generate 20 hearts
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.style.left = `${Math.random() * 100}%`;
+                heart.style.animationDuration = `${2 + Math.random() * 3}s`; // Random fall speed
+                document.body.appendChild(heart);
+            }
+        }
+
+        function startFireworks() {
+            const canvas = document.createElement('canvas');
+            canvas.id = 'fireworksCanvas';
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+    
+            let fireworks = [];
+    
+            class Firework {
+                constructor(x, y) {
+                    this.x = x;
+                    this.y = y;
+                    this.particles = [];
+                    for (let i = 0; i < 30; i++) {
+                        this.particles.push({
+                            x: this.x,
+                            y: this.y,
+                            angle: Math.random() * 2 * Math.PI,
+                            speed: Math.random() * 5 + 2,
+                            alpha: 1
+                        });
+                    }
+                }
+                update() {
+                    this.particles.forEach(p => {
+                        p.x += Math.cos(p.angle) * p.speed;
+                        p.y += Math.sin(p.angle) * p.speed;
+                        p.alpha -= 0.02;
+                    });
+                    this.particles = this.particles.filter(p => p.alpha > 0);
+                }
+                draw() {
+                    ctx.globalAlpha = 1;
+                    this.particles.forEach(p => {
+                        ctx.fillStyle = `rgba(255, ${Math.random() * 255}, ${Math.random() * 255}, ${p.alpha})`;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                }
+            }
+    
+            function loop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                fireworks.forEach(f => f.update());
+                fireworks.forEach(f => f.draw());
+                fireworks = fireworks.filter(f => f.particles.length > 0);
+                requestAnimationFrame(loop);
+            }
+    
+            document.addEventListener('click', (e) => {
+                fireworks.push(new Firework(e.clientX, e.clientY));
+            });
+    
+            loop();
+        }
+
+        function createHeart2(color, delay, isLast) {
+            const heart2 = document.createElement("div");
+            heart2.classList.add("heart2");
+            heart2.style.backgroundColor = color;
+            document.body.appendChild(heart2);
+
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            heart2.style.left = `${centerX - 25}px`;
+            heart2.style.top = `${centerY - 25}px`;
+
+            setTimeout(() => {
+                heart2.style.transition = "transform 2s ease-in-out, opacity 2s ease-in-out";
+                heart2.style.transform = `scale(${window.innerWidth / 50}) rotate(-45deg)`;
+                heart2.style.opacity = "1";
+            }, delay);
+
+            if (isLast) {
+                setTimeout(() => {
+                    heart2.style.transition = "none";
+                    heart2.style.transform = `scale(${window.innerWidth / 50}) rotate(-45deg)`;
+                    heart2.style.position = "fixed";
+                    heart2.style.left = "0";
+                    heart2.style.top = "0";
+                    heart2.style.width = "100vw";
+                    heart2.style.height = "100vh";
+                }, delay + 2000);
+            }
+        }
+
+        function startHeart2Animation() {
+            const colors = ["#FF0000", // Red
+    "#FF69B4", "#FF1493", "#FFB6C1", "#FFC0CB", "#FFD700", "#FF6347", "#FF4500", "#DC143C", "#DDA0DD"];
+
+            colors.forEach((color, index) => {
+                setTimeout(() => {
+                    createHeart2(color, 500 * index, index === colors.length - 1);
+                }, index * 500);
+            });
+        }
+    </script> 
+</head>
+<body>
+    <div class="question">Would You Be My Valentine?</div>
+    <div class="images-container">
+        <img id="left-image" class="side-image" src="photos/1.JPG" alt="Left Image">
+        <img id="right-image" class="side-image" src="photos/4.jpg" alt="Right Image">
+    </div>
+    <div class="images-container second-row">
+        <img id="left-image-2" class="side-image" src="photos/3.JPG" alt="Left Image 2">
+        <img id="right-image-2" class="side-image" src="photos/2.JPG" alt="Right Image 2">
+    </div>
+    <div class="buttons">
+        <button id="yes-btn" onclick="startCelebration()">Yes</button>
+        <button id="btn">No</button>
+    </div>
+</body>
+</html>
