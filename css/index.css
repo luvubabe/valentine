@@ -17,7 +17,7 @@ body {
 
 @font-face {
     font-family: 'Kissing Season à €';
-    src: url('/fonts/KS.ttf') format('truetype');
+    src: url('../fonts/KS.ttf') format('truetype');
 }
 
 .question {
